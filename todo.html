@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="yes.css">
+    </head>
+    <body>
+    
+        <input id="todo-title" type="text" class="todoTitle" /> 
+        
+        <input id="date-picker" type="date" class="datePicker" />
+        <button onclick ="addTodo()" class ="addtodobtn">Add To-Do</button>
+        <div id="todo-list" c"></div>
+      
+            <script>
+                //Model
+                document. title = "Rob's To-Do List"; 
+               
+                let todos = [{
+                    title: 'Get Groceries',
+                    dueDate: '2022-7-7',
+                    id: 'id1'
+                 }, {
+                    title: "Love Hayley",
+                    dueDate:'2022-7-7',
+                    id: 'id2'
+                 }, {
+                    title: "Make Dinner",
+                    dueDate: '2022-7-7',
+                    id: "id3"
+
+                }]; 
+
+                //Creates a todo
+                function createTodo(title, dueDate) {
+                    const id = "" + new Date().getTime();
+
+                    todos.push({
+                        title:title,
+                        dueDate: dueDate,
+                        id: id
+                    });
+                }
+                
+                //deletes a todo
+                function removeTodo(idToDelete) {
+                    todos = todos.filter(function (todo) {
+                    if (todo.id === idToDelete) {
+                        return false;
+                    }else {
+                        return true;
+                    }
+                      
+                });
+            }
+
+                render(); 
+
+                //Controller
+                function addTodo() {
+                    const textbox = document.getElementById('todo-title');
+                    const title = textbox.value; 
+                    
+                    
+                    
+                    const datePicker = document.getElementById('date-picker');
+                    const dueDate = datePicker.value; 
+
+                    createTodo(title, dueDate);
+                    render()
+                }
+
+                    function deleteTodo(event) {
+                    const deleteButton = event.target
+                    const idToDelete = deleteButton.id
+
+                    removeTodo(idToDelete);
+                    render();
+
+
+                   
+                render()
+            }
+
+                render()
+                //View
+                function render() {
+                    
+                    document.getElementById('todo-list').innerHTML = " "; 
+
+                    todos.forEach(function (todo) {
+                    const element = document.createElement('div');
+                    element.innerText = todo.title + " " + todo.dueDate    
+
+                    const todoList= document.getElementById('todo-list');
+                    todoList.appendChild(element);
+
+                    const deleteButton = document.createElement('button');
+                    deleteButton.innerText = "delete";
+                    deleteButton.style = "margin-left:12px"
+                    deleteButton.onclick=deleteTodo;
+                    deleteButton.style="background-color:red";
+                    deleteButton.style='border-width:.5px'
+                    deleteButton.id = todo.id
+                    element.appendChild(deleteButton);
+                    });
+                    }
+                
+                render()
+             
+
+            
+
+               
+
+                // element = document.createElement('div');
+                // element.innerText = todo2;
+                // document.body.appendChild(element);
+
+                // element = document.createElement('div');
+                // element.innerText = todo3;
+                // document.body.appendChild(element);
+
+
+         </script>
+    </body>
+</html>
